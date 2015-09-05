@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Wekeypedia - Recommendation system</title>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+      <center>
+        <div">
+            <div>
+                <a href="/"><img src="{{ url_for('static', filename='pict/logo.svg') }}"/></a>
+            </div>
+            <div>
+                <h1>Wekeypedia</h1>
+                <p>Recommendation system</p>
+            </div>
+        </div>
+        <br/>
+        <div class=page-body>
+            <div class=form>
+                <form action="{{ url_for('form') }}" method=post>
+                    Title: <input type=text size=20 name="title" value="">
+                    Domain: <SELECT name="domain" size="1">
+                        <OPTION>en
+                    </SELECT><br/>
+                    Start index: <input type=text size=5 name=start value=0>
+                    End index: <input type=text size=5 name=end value=10><br/>
+                    <input type=submit value=Fetch>
+                </form>
+            </div>
+            <br/>
+            {% if entries %}
+                <div>
+                   Recommendation for page "{{title}}" from domain "{{domain}}". The result between {{start}} and {{end}} are displayed.<br/>
+                   URL to get the result: <a href="/api/{{domain}}/{{title}}/{{start}}/{{end}}">/api/{{domain}}/{{title}}/{{start}}/{{end}}</a>
+                   <br/><br/>
+                    <TABLE BORDER="1" cellspacing="0" cellpading="2px"> 
+                        <TR><TH> Title </TH><TH> Score </TH><TR> 
+                        {% for entry in entries %} 
+                            <TR><TD>{{entry.title}}</TD><TD>{{entry.click}}</TD></TR> 
+                        {% endfor %}
+                    </TABLE>
+                </div>
+            {% endif %}
+            {% if message %}
+                <div>
+                    <h2>{{ message.title }} </h2> 
+                    {{ message.text }}
+                </div>
+            {% endif %}
+        </div>
+      </center>
+    </body>
+</html>

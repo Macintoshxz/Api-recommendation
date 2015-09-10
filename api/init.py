@@ -1,15 +1,14 @@
 from pymongo import MongoClient
-import pandas as pd
 import codecs
 
-input_file = 'data/2015_02_clickstream.tsv'
+input_file = '../../OnePercent/data/2015_02_clickstream.tsv'
 
 with open(input_file, "r") as f:
     tsv = f.readlines()
     
 dic_res = {}
 
-for line in tsv:
+for line in tsv[1:]:
     l = line.split("\t")
     if l[0]!='':
         if l[3] in dic_res:

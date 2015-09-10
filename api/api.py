@@ -26,7 +26,7 @@ def get_recommendation(domain,title):
 @app.route("/api/<domain>/<title>/<start>/<end>")
 def api(domain,title,start='0',end='10'):
     values = get_recommendation(domain,title)
-    reco = sorted(values,key=lambda x:int(x['click']),reverse=True)[int(start):int(end)]
+    reco = sorted(values,key=lambda x:x['score'],reverse=True)[int(start):int(end)]
     recomm = { 'domain':domain,
                'title':title, 
                'start':start,
@@ -40,7 +40,7 @@ def api(domain,title,start='0',end='10'):
 def display(domain='en',title='',start='0',end='10'):
     if title!='':
         values = get_recommendation(domain,title)
-        reco=sorted(values,key=lambda x:int(x['click']),reverse=True)[int(start):int(end)]
+        reco=sorted(values,key=lambda x:x['score'],reverse=True)[int(start):int(end)]
         if len(reco)==0:
             text = 'The page "%s" with domain "%s" has not been found.' % (title,domain)
             return render_template('main.html',message={'title':'Page not found','text':text})

@@ -12,11 +12,16 @@
             </div>
             <div>
                 <h1>Wekeypedia</h1>
-                <p>Recommendation system</p>
+                <h2>Recommendation system</h2>
             </div>
         </div>
         <br/>
         <div class=page-body>
+            <h3>Examples:</h3>
+            <a href="/api/en/Circle/0/10">/api/en/Circle/0/10</a><br/>
+            <a href="/api/en/Geometry/0/40">/api/en/Geometry/0/40</a><br/>
+            <a href="/api/en/Algorithm/10/30">/api/en/Algorithm/10/30</a><br/>
+            <h3>Form:</h3>
             <div class=form>
                 <form action="{{ url_for('form') }}" method=post>
                     Title: <input type=text size=20 name="title" value="">
